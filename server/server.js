@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+
+// const apiRouter = require ('./routes/api');
+
 const PORT = 3000;
 const foodController = require('../getFoodMiddleware');
 // Api Call/openfoodfacts-react-native/API/Api.js
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.get('/style.css', (req, res) => {
   res
@@ -14,6 +18,11 @@ app.get('/style.css', (req, res) => {
     .set('Content-Type', 'text/css')
     .sendFile(path.resolve(__dirname, '../client/style.css'));
 });
+
+// app.use(express.static(path.resolve(__dirname, '../client')));
+
+app.use('/api', apiRouter);
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
