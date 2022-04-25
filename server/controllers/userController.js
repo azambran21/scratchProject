@@ -64,8 +64,8 @@ const userController = {
 
     addTable(req, res, next) {
 
-    }
-addFood(req, res, next) {
+    },
+    addFood(req, res, next) {
         const { img_url, product_name, calories, fat, protein, carbs } = req.body;
         const command = `INSERT INTO food (img_url, product_name, calories, fat, protein, carbs)
         VALUES ($1,$2,$3,$4)
