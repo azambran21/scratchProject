@@ -40,15 +40,19 @@ const userController = {
 
 
     addUser(req, res, next) {
-        const { username, password, firstName, lastName, height, weight, food_id } = req.body;
+        const { username, firstName, lastName, height, weight, food_id
+        } = req.body;
         const command = `INSERT INTO users (username, password, firstName, lastName, height, weight)
-        VALUES ($1,$2,$3,$4$,5,$6)
+        VALUES ($1,$2,$3,$4,$5,$6)
         RETURNING *`;
+        const newFood = addFood(req, res, next);
+
+        food_id = newFood._id;
+
         const foodCommand = ``;
 
         const params = [
             username,
-            password,
             firstName,
             lastName,
             height,
@@ -58,14 +62,19 @@ const userController = {
 
     },
 
-    addFood(req, res, next) {
-        const { calories, fat, protein, carbs } = req.body;
-        const command = `INSERT INTO food (calories, fat, protein, carbs)
+    addTable(req, res, next) {
+
+    }
+addFood(req, res, next) {
+        const { img_url, product_name, calories, fat, protein, carbs } = req.body;
+        const command = `INSERT INTO food (img_url, product_name, calories, fat, protein, carbs)
         VALUES ($1,$2,$3,$4)
         RETURNING *`;
         const userCommand = ``;
 
         const params = [
+            img_url,
+            product_name,
             calories,
             fat,
             protein,

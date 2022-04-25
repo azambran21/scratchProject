@@ -21,8 +21,15 @@ app.get('/style.css', (req, res) => {
 
 // app.use(express.static(path.resolve(__dirname, '../client')));
 
-app.use('/api', apiRouter);
+app.use('/api', foodController);
 
+app.post('/signup', userController.addUser, userController.getUser, (req, res) => {
+  res.statusCode(200).render(path.resolve(__dirname, '../client/index'));
+})
+
+app.post('/login', userController.getUser, (req, res) => {
+  res.statusCode(200).render(path.resolve(__dirname, '../client/index'));
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
